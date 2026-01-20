@@ -1,82 +1,151 @@
-/* =========================
-   Base editorial WSJ-style
-   ========================= */
+/* Importando fuentes similares a las del WSJ */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
+
+:root {
+    --wsj-black: #000000;
+    --wsj-gray: #666666;
+    --border-thick: 3px solid black;
+    --border-thin: 1px solid black;
+}
 
 body {
-  font-family: "Source Serif 4", serif;
-  background-color: #ffffff;
-  color: #111;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 20px 80px;
-  line-height: 1.75;
-  font-size: 18px;
+    background-color: #fff;
+    color: #111;
+    font-family: 'Source Serif 4', serif;
+    margin: 0;
+    padding: 20px;
+    /* Esto hace que el diseño abarque casi toda la pantalla */
+    max-width: 95%; 
+    margin: 0 auto;
+    line-height: 1.2;
 }
 
-/* Masthead superior */
+/* --- CABECERA (MASTHEAD) --- */
 
-.page-top {
-  display: flex;
-  justify-content: flex-start;
-  font-family: "Libre Caslon Text", serif;
-  font-size: 0.85em;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Libre Caslon Text', serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    border-bottom: var(--border-thin);
+    padding-bottom: 4px;
+    margin-bottom: 20px;
 }
 
-.masthead-left {
-  font-weight: 600;
+.heard-on-street {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
-/* Líneas finas */
-
-.rule {
-  border: none;
-  border-top: 1px solid #000;
-  margin: 10px 0 18px;
+.heard-on-street h1 {
+    font-family: 'Playfair Display', serif; /* Muy cercana a la tipografía del logo */
+    font-size: 65px;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: -1px;
+    text-transform: uppercase;
 }
 
-/* Título principal */
-
-.main-title {
-  text-align: center;
-  margin: 10px 0 12px;
+.heard-on-street span {
+    display: block;
+    font-family: 'Libre Caslon Text', serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: -10px;
+    border-top: var(--border-thin);
+    display: inline-block;
+    padding-top: 5px;
 }
 
-.main-title h1 {
-  font-family: "Libre Caslon Display", serif;
-  font-size: 4.2em;
-  font-weight: normal;
-  margin: 0;
-  line-height: 1.05;
+/* --- TITULARES --- */
+
+.main-headline {
+    text-align: left;
+    border-top: var(--border-thick);
+    padding-top: 15px;
+    margin-top: 20px;
 }
 
-.subtitle {
-  font-family: "Libre Caslon Text", serif;
-  font-size: 0.85em;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  margin-top: 6px;
+.main-headline h2 {
+    font-family: 'Libre Caslon Text', serif;
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
 }
 
-/* Gran titular inferior */
-
-.big-headline {
-  margin-top: 30px;
-  margin-bottom: 40px;
+.sub-headline {
+    font-family: 'Libre Caslon Text', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: var(--border-thin);
+    padding-bottom: 15px;
 }
 
-.big-headline h2 {
-  font-family: "Libre Caslon Text", serif;
-  font-size: 2.8em;
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0;
+/* --- LAYOUT DE CONTENIDO (COLUMNAS) --- */
+
+.content-wrapper {
+    display: grid;
+    /* Tres columnas para el estilo clásico de diario */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    text-align: justify;
 }
 
-/* Cuerpo (temporal) */
+/* Ajuste para que las imágenes o gráficos ocupen espacio */
+.featured-image {
+    grid-column: span 1;
+    width: 100%;
+}
 
-main p {
-  max-width: 760px;
+.featured-image img {
+    width: 100%;
+    filter: grayscale(20%);
+}
+
+.article-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    /* Indentación de párrafo estilo periódico (excepto el primero) */
+}
+
+.article-text p + p {
+    text-indent: 1.5em;
+    margin-top: 0;
+}
+
+/* Letra capital (Drop Cap) */
+.article-text p:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif;
+    float: left;
+    font-size: 75px;
+    line-height: 60px;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-left: 3px;
+}
+
+/* Firmas */
+.byline {
+    font-family: 'Libre Caslon Text', serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-top: 20px;
+    text-align: right;
+    border-top: var(--border-thin);
+    padding-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .content-wrapper {
+        grid-template-columns: 1fr;
+    }
 }
