@@ -40,7 +40,8 @@ function renderCards(containerId = 'courses-grid', items = COURSES) {
   const appendOne = (course) => {
     const clone = tpl.content.cloneNode(true);
     // populate clone
-    const article = clone.querySelector('.card');
+    const card = clone.querySelector('.card');
+     card.href = `cursos/${course.slug}/`;
     const titleEl = clone.querySelector('.card-title');
     const metaEl = clone.querySelector('.card-meta');
     const progressBar = clone.querySelector('.progress-bar');
