@@ -8,7 +8,7 @@
   <meta name="description" content="Portafolio académico de Alejandro Vargas Araujo — cursos y materiales en Macroeconomía, Microeconomía, Econometría y más. Diseño minimalista inspirado en prensa financiera." />
   <link rel="canonical" href="https://USERNAME.github.io/REPO/" />
 
-  <!-- JSON-LD para SEO académico (Person + Courses placeholders) -->
+  <!-- JSON-LD para SEO académico -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -20,23 +20,16 @@
   }
   </script>
 
-  <!-- Carga de fuentes (Playfair Display para títulos, Lora para cuerpo, Roboto para UI) -->
+  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?
-    family=Playfair+Display:wght@400;700&
-    family=Lora:wght@400;700&
-    family=Roboto:wght@400;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon / Touch icon (placeholder) -->
   <link rel="icon" href="assets/images/favicon.png" />
-
-  <!-- Estilos principales -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <!-- Header centrado verticalmente -->
   <header class="site-header" role="banner" aria-label="Cabecera principal">
     <div class="container header-inner">
       <h1 class="site-title">Alejandro Vargas Araujo</h1>
@@ -44,30 +37,23 @@
     </div>
   </header>
 
-  <!-- Breadcrumb (futuro) -->
-
-  <!-- Main content: Grid de tarjetas -->
   <main id="main" class="container" role="main" aria-labelledby="main-title">
     <h2 id="main-title" class="sr-only">Cursos y materiales</h2>
 
-    <!-- Grid: 3 col desktop, 2 tablet, 1 mobile -->
     <section id="courses-grid" class="grid" aria-label="Lista de cursos">
-      <!-- Template de tarjeta para replicar (mejor rendimiento y accesibilidad) -->
+      
+      <!-- Template seguro para clonación -->
       <template id="course-card-template">
-        <a class="card"
-   href=""
-   role="link"
-   aria-labelledby="course-title">
-
+        <a class="card" href="">
           <div class="card-icon" aria-hidden="true">
-            <!-- SVG minimalista inline (permite styling y alta calidad) -->
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
               <rect x="3" y="4" width="18" height="4" rx="1"></rect>
               <rect x="3" y="10" width="18" height="10" rx="1"></rect>
             </svg>
           </div>
+
           <div class="card-body">
-            <h3 class="card-title" id="course-title">Nombre del curso</h3>
+            <h3 class="card-title">Nombre del curso</h3>
             <p class="card-meta">2024 · Semestre I · 12 lecciones</p>
             <div class="card-progress" aria-hidden="true">
               <div class="progress-bar" style="--pct:0%"></div>
@@ -76,11 +62,9 @@
         </a>
       </template>
 
-      <!-- Placeholder inicial (cargado por JS) -->
     </section>
   </main>
 
-  <!-- Footer con contacto académico -->
   <footer class="site-footer" role="contentinfo" aria-label="Pie de página">
     <div class="container footer-inner">
       <p>Contacto académico: <a href="mailto:alejandro.vargas@example.edu">alejandro.vargas@example.edu</a></p>
@@ -88,7 +72,6 @@
     </div>
   </footer>
 
-  <!-- Script para interactividad ligera (keyboard, lazy rendering, placeholders) -->
   <script src="script.js" defer></script>
 </body>
 </html>
