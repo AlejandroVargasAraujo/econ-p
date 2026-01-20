@@ -54,7 +54,11 @@
     <section id="courses-grid" class="grid" aria-label="Lista de cursos">
       <!-- Template de tarjeta para replicar (mejor rendimiento y accesibilidad) -->
       <template id="course-card-template">
-        <article class="card" tabindex="0" role="article" aria-labelledby="course-title">
+        <a class="card"
+   href=""
+   role="link"
+   aria-labelledby="course-title">
+
           <div class="card-icon" aria-hidden="true">
             <!-- SVG minimalista inline (permite styling y alta calidad) -->
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
@@ -69,7 +73,7 @@
               <div class="progress-bar" style="--pct:0%"></div>
             </div>
           </div>
-        </article>
+        </a>
       </template>
 
       <!-- Placeholder inicial (cargado por JS) -->
