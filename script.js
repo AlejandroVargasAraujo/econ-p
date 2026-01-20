@@ -6,13 +6,26 @@
    En producción puede venir de un JSON, API o MD files.
 */
 const COURSES = [
-  { id: 1, title: "Macroeconomía Avanzada", year: "2023", term: "Semestre II", lessons: 14, progress: 0.75 },
-  { id: 2, title: "Microeconomía Intermedia", year: "2023", term: "Semestre I", lessons: 10, progress: 0.4 },
-  { id: 3, title: "Econometría I", year: "2024", term: "Semestre I", lessons: 12, progress: 0.2 },
-  { id: 4, title: "Métodos Cuantitativos", year: "2022", term: "Semestre II", lessons: 8, progress: 1.0 },
-  { id: 5, title: "Teoría de Juegos", year: "2024", term: "Semestre II", lessons: 9, progress: 0.0 },
-  { id: 6, title: "Política Económica", year: "2021", term: "Semestre I", lessons: 11, progress: 0.6 }
+  {
+    id: 1,
+    title: "Macroeconomía Avanzada",
+    slug: "macroeconomia-avanzada",
+    year: "2023",
+    term: "Semestre II",
+    lessons: 14,
+    progress: 0.75
+  },
+  {
+    id: 2,
+    title: "Microeconomía Intermedia",
+    slug: "microeconomia-intermedia",
+    year: "2023",
+    term: "Semestre I",
+    lessons: 10,
+    progress: 0.4
+  }
 ];
+
 
 // Renderiza tarjetas usando <template>
 function renderCards(containerId = 'courses-grid', items = COURSES) {
@@ -41,7 +54,6 @@ function renderCards(containerId = 'courses-grid', items = COURSES) {
     article.setAttribute('aria-labelledby', titleEl.id);
 
     // Click / keyboard handler
-    article.addEventListener('click', () => openCourse(course));
     article.addEventListener('keydown', (ev) => {
       if (ev.key === 'Enter' || ev.key === ' ') {
         ev.preventDefault();
