@@ -21,11 +21,12 @@ header {
 
 header h1 {
   font-family: "Libre Caslon Text", serif;
-  font-size: 3.1em;
+  font-size: 3.2em;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 10px;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
 }
+
 
 nav {
   font-family: "Libre Caslon Text", serif;
