@@ -11,18 +11,21 @@ const COURSES = [
     term: "No Aplica",
     lessons: 0,
     progress: 0
-  }
-];
+  },
   {
     id: 2,
     title: "Macroeconometría",
-    slug: "macroeconometría",
+    slug: "macroeconometria", // mejor sin acentos en el slug
     year: "2023",
     term: "Semestre I",
     lessons: 0,
     progress: 0
   }
 ];
+
+// Valores para el render inicial y contador de ya renderizados
+let initialCount = Math.min(6, COURSES.length);
+let rendered = 0;
 
 // MODIFICA la función renderCards para ocultar progreso y lecciones:
 function renderCards(containerId = 'courses-grid', items = COURSES) {
@@ -37,35 +40,33 @@ function renderCards(containerId = 'courses-grid', items = COURSES) {
     const titleEl = clone.querySelector('.card-title');
     const metaEl = clone.querySelector('.card-meta');
     const progressBar = clone.querySelector('.progress-bar');
-    const cardProgress = clone.querySelector('.card-progress'); // NUEVA REFERENCIA
+    const cardProgress = clone.querySelector('.card-progress');
 
     // Contenido
     titleEl.textContent = course.title;
-    
-    // MODIFICA esta línea para mostrar solo año y semestre
+
+    // mostrar solo año y semestre
     metaEl.textContent = `${course.year} · ${course.term}`;
-    
-    // REMUEVE la línea que muestra lecciones:
-    // ANTES: metaEl.textContent = `${course.year} · ${course.term} · ${course.lessons} lecciones`;
-    
+
     // OCULTA la barra de progreso si es 0
     if (course.progress === 0) {
       if (cardProgress) {
-        cardProgress.style.display = 'none'; // OCULTAR progreso
+        cardProgress.style.display = 'none';
       }
     } else {
       // Solo mostrar progreso si no es 0
-      progressBar.style.setProperty('--pct', `${Math.round(course.progress * 100)}%`);
+      if (progressBar) {
+        progressBar.style.setProperty('--pct', `${Math.round(course.progress * 100)}%`);
+      }
     }
 
-    // Navegación real
-    card.href = `cursos/${course.slug}/`;
+    // Navegación real (codifica el slug por si hay caracteres especiales)
+    card.href = `cursos/${encodeURIComponent(course.slug)}/`;
 
     // Accesibilidad
     card.setAttribute(
       'aria-label',
       `${course.title}, ${course.year}, ${course.term}`
-      // REMOVER: ${course.lessons} lecciones
     );
 
     container.appendChild(clone);
@@ -73,6 +74,7 @@ function renderCards(containerId = 'courses-grid', items = COURSES) {
 
   // Render inicial
   for (let i = 0; i < initialCount; i++) {
+    if (i >= items.length) break;
     appendOne(items[i]);
     rendered++;
   }
