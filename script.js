@@ -5,32 +5,30 @@
 const COURSES = [
   {
     id: 1,
-    title: "Macroeconomía Avanzada",
-    slug: "macroeconomia-avanzada",
-    year: "2023",
-    term: "Semestre II",
-    lessons: 14,
-    progress: 0.75
-  },
+    title: "Finanzas Cuantitativas",
+    slug: "finanzas-cuantitativas",
+    year: "2026",
+    term: "No Aplica",
+    lessons: 0,
+    progress: 0
+  }
+];
   {
     id: 2,
-    title: "Microeconomía Intermedia",
-    slug: "microeconomia-intermedia",
+    title: "Macroeconometría",
+    slug: "macroeconometría",
     year: "2023",
     term: "Semestre I",
-    lessons: 10,
-    progress: 0.4
+    lessons: 0,
+    progress: 0
   }
 ];
 
-// Renderiza tarjetas usando <template>
+// MODIFICA la función renderCards para ocultar progreso y lecciones:
 function renderCards(containerId = 'courses-grid', items = COURSES) {
   const container = document.getElementById(containerId);
   const tpl = document.getElementById('course-card-template');
   if (!container || !tpl) return;
-
-  const initialCount = Math.min(3, items.length);
-  let rendered = 0;
 
   const appendOne = (course) => {
     const clone = tpl.content.cloneNode(true);
@@ -39,19 +37,35 @@ function renderCards(containerId = 'courses-grid', items = COURSES) {
     const titleEl = clone.querySelector('.card-title');
     const metaEl = clone.querySelector('.card-meta');
     const progressBar = clone.querySelector('.progress-bar');
+    const cardProgress = clone.querySelector('.card-progress'); // NUEVA REFERENCIA
 
     // Contenido
     titleEl.textContent = course.title;
-    metaEl.textContent = `${course.year} · ${course.term} · ${course.lessons} lecciones`;
-    progressBar.style.setProperty('--pct', `${Math.round(course.progress * 100)}%`);
+    
+    // MODIFICA esta línea para mostrar solo año y semestre
+    metaEl.textContent = `${course.year} · ${course.term}`;
+    
+    // REMUEVE la línea que muestra lecciones:
+    // ANTES: metaEl.textContent = `${course.year} · ${course.term} · ${course.lessons} lecciones`;
+    
+    // OCULTA la barra de progreso si es 0
+    if (course.progress === 0) {
+      if (cardProgress) {
+        cardProgress.style.display = 'none'; // OCULTAR progreso
+      }
+    } else {
+      // Solo mostrar progreso si no es 0
+      progressBar.style.setProperty('--pct', `${Math.round(course.progress * 100)}%`);
+    }
 
-    // Navegación real (página dedicada)
+    // Navegación real
     card.href = `cursos/${course.slug}/`;
 
-    // Accesibilidad: etiqueta descriptiva
+    // Accesibilidad
     card.setAttribute(
       'aria-label',
-      `${course.title}, ${course.year}, ${course.term}, ${course.lessons} lecciones`
+      `${course.title}, ${course.year}, ${course.term}`
+      // REMOVER: ${course.lessons} lecciones
     );
 
     container.appendChild(clone);
