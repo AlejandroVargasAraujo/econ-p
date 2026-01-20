@@ -1,10 +1,7 @@
 // script.js
-// Interactividad ligera: renderizado de tarjetas desde plantilla (lazy-ish),
-// keyboard handling y demo de progreso. Código vanilla, sin dependencias.
+// Renderizado de tarjetas desde <template>.
+// Vanilla JS, sin dependencias, orientado a navegación real por páginas.
 
-/* Datos de ejemplo / placeholders de cursos
-   En producción puede venir de un JSON, API o MD files.
-*/
 const COURSES = [
   {
     id: 1,
@@ -26,52 +23,47 @@ const COURSES = [
   }
 ];
 
-
 // Renderiza tarjetas usando <template>
 function renderCards(containerId = 'courses-grid', items = COURSES) {
   const container = document.getElementById(containerId);
   const tpl = document.getElementById('course-card-template');
   if (!container || !tpl) return;
 
-  // Render incremental (simple lazy rendering): primero 3, luego el resto al hacer scroll
   const initialCount = Math.min(3, items.length);
   let rendered = 0;
 
   const appendOne = (course) => {
     const clone = tpl.content.cloneNode(true);
-    // populate clone
+
     const card = clone.querySelector('.card');
-     card.href = `cursos/${course.slug}/`;
     const titleEl = clone.querySelector('.card-title');
     const metaEl = clone.querySelector('.card-meta');
     const progressBar = clone.querySelector('.progress-bar');
 
+    // Contenido
     titleEl.textContent = course.title;
     metaEl.textContent = `${course.year} · ${course.term} · ${course.lessons} lecciones`;
     progressBar.style.setProperty('--pct', `${Math.round(course.progress * 100)}%`);
 
-    // Accessibility: set aria-label and unique id for course title for screen readers
-    titleEl.id = `course-title-${course.id}`;
-    article.setAttribute('aria-labelledby', titleEl.id);
+    // Navegación real (página dedicada)
+    card.href = `cursos/${course.slug}/`;
 
-    // Click / keyboard handler
-    article.addEventListener('keydown', (ev) => {
-      if (ev.key === 'Enter' || ev.key === ' ') {
-        ev.preventDefault();
-        openCourse(course);
-      }
-    });
+    // Accesibilidad: etiqueta descriptiva
+    card.setAttribute(
+      'aria-label',
+      `${course.title}, ${course.year}, ${course.term}, ${course.lessons} lecciones`
+    );
 
     container.appendChild(clone);
   };
 
-  // Append initial
+  // Render inicial
   for (let i = 0; i < initialCount; i++) {
     appendOne(items[i]);
     rendered++;
   }
 
-  // If more items exist, use IntersectionObserver to append when near bottom
+  // Lazy rendering con IntersectionObserver
   if (rendered < items.length && 'IntersectionObserver' in window) {
     const sentinel = document.createElement('div');
     sentinel.className = 'sentinel';
@@ -80,14 +72,13 @@ function renderCards(containerId = 'courses-grid', items = COURSES) {
     const io = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // append next one or few
           for (let i = 0; i < 2 && rendered < items.length; i++) {
             appendOne(items[rendered]);
             rendered++;
           }
           if (rendered >= items.length) {
             observer.disconnect();
-            if (sentinel.parentNode) sentinel.parentNode.removeChild(sentinel);
+            sentinel.remove();
           }
         }
       });
@@ -95,19 +86,13 @@ function renderCards(containerId = 'courses-grid', items = COURSES) {
 
     io.observe(sentinel);
   } else {
-    // fallback: append all
-    for (let i = rendered; i < items.length; i++) appendOne(items[i]);
+    for (let i = rendered; i < items.length; i++) {
+      appendOne(items[i]);
+    }
   }
 }
 
-// Placeholder action when se abre un curso (puede integrarse con modal o nueva página)
-function openCourse(course) {
-  // Simple progressive UX: muestra un alert accesible (en producción, abrir página dedicada)
-  const pct = Math.round(course.progress * 100);
-  alert(`${course.title}\n${course.year} · ${course.term}\nLecciones: ${course.lessons}\nProgreso: ${pct}%`);
-}
-
-// Accessibility: enable focus outlines for keyboard users only
+// Focus outlines solo para usuarios de teclado
 (function manageFocusOutline() {
   function handleFirstTab(e) {
     if (e.key === 'Tab') {
@@ -118,7 +103,7 @@ function openCourse(course) {
   window.addEventListener('keydown', handleFirstTab);
 })();
 
-// Initialize render
+// Init
 document.addEventListener('DOMContentLoaded', () => {
   renderCards();
 });
