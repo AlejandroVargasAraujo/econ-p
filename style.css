@@ -1,4 +1,4 @@
-/* style.css
+/** style.css
    Sistema tipográfico y visual inspirado en WSJ/Economist + minimalismo suizo.
    Variables CSS para consistencia, accesibilidad y futura theming.
 */
@@ -237,3 +237,27 @@ body{
 @media (prefers-reduced-motion: reduce){
   .card, .progress-bar { transition: none !important; transform:none !important; }
 }
+
+/* --------------------
+   Component: Promo holder (Finanzas Cuantitativas)
+   -------------------- */
+.promo-holder {
+  margin-top: 1.5rem;
+  background: linear-gradient(180deg, #ffffff, #f6fbff);
+  border-left: 4px solid var(--accent);
+  padding: 1.25rem;
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  text-decoration:none;
+  color:inherit;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.promo-holder:focus,
+.promo-holder:hover { transform: translateY(-2px); box-shadow: var(--card-shadow); }
+
+.promo-icon{ width:56px; height:56px; flex:0 0 56px; display:flex; align-items:center; justify-content:center; background:rgba(41,128,185,0.06); border-radius:8px; }
+.promo-title{ font-family: var(--font-title); font-size:1.125rem; margin:0; color:var(--title-gray); }
+.promo-desc{ margin:0; color:var(--title-gray); opacity:0.85; font-family:var(--font-ui); }
